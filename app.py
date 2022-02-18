@@ -18,6 +18,3 @@ def home(request, response, name, q):
 @app.route('/about')
 def about(request, response):
     response.text = "Hello from the ABOUT page"
-
-
-app.create_docs()

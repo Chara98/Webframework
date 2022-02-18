@@ -79,8 +79,3 @@ class API:
         else:
             self.default_response(response)
         return response
-
-    def create_docs(self):
-        @self.route('/docs')
-        def abc(request, resp):
-            resp.text = f'{self.routes}'
