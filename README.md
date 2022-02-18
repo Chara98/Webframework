@@ -9,6 +9,6 @@ pip install -r requirements.txt
 
 # Run this
 waitress-serve --listen=0.0.0.0:8000 app:app
-
-# app.py and templates/index.html is an example for using this framework
 ```
+- app.py and templates/index.html is an example for using this framework
+- you can edit app.py and add more templates
