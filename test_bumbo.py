@@ -68,3 +68,19 @@ def test_query_param(api, client):
         response.text = q
 
     assert client.get('http://testserver/abc?q=hello').text == 'hello'
+
+
+def test_unneeded_query(api, client):
+    @api.route('/abc')
+    def abc(request, resp, q):
+        resp.text = q
+
+    assert client.get('http://testserver/abc?hasd=asd&q=a').text == 'a'
+
+
+def test_multiple_query(api, client):
+    @api.route('/abc')
+    def abc(request, resp, a, b, c):
+        resp.text = f'{a}, {b}, {c}'
+
+    assert client.get('http://testserver/abc?a=a&b=b&c=c').text == 'a, b, c'
