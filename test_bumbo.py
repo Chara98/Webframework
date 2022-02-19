@@ -89,3 +89,14 @@ def test_query_with_default(api, client):
     def abc(request, resp, a=None):
         resp.text = 'a = '
     assert client.get('http://testserver/abc').text == 'a = '
+
+
+def test_post_method(api, client):
+    @api.route('/abc')
+    def abc(request, resp):
+        if request.method == 'POST':
+            resp.text = '...'
+        else:
+            resp.text = 'None'
+
+        assert client.post('http://testserver/abc').text == '...'
