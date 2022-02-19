@@ -84,3 +84,10 @@ def test_multiple_query(api, client):
         resp.text = f'{a}, {b}, {c}'
 
     assert client.get('http://testserver/abc?a=a&b=b&c=c').text == 'a, b, c'
+
+
+def test_query_with_default(api, client):
+    @api.route("/abc")
+    def abc(request, resp, a=None):
+        resp.text = 'a = '
+    assert client.get('http://testserver/abc').text == 'a = '

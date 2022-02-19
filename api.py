@@ -16,7 +16,7 @@ class API:
 
     def __call__(self, environ, start_response):
         request = Request(environ)
-        self.q = environ['QUERY_STRING']
+        self.query = environ['QUERY_STRING']
         response = self.handle_request(request)
         return response(environ, start_response)
 
@@ -53,7 +53,7 @@ class API:
     def find_handler(self, request_path):
         for path, handler in self.routes.items():
             parse_result = parse(path, request_path)
-            q = self.q
+            q = self.query
             if parse_result is not None:
                 if q != '':
                     return handler, q, parse_result.named
@@ -63,7 +63,7 @@ class API:
 
     def handle_request(self, request):
         response = Response()
-        if self.q != '':
+        if self.query != '':
             handler, *kwargs = self.find_handler(request_path=request.path)
             query = kwargs[0].split('&')
             query = {i.split('=')[0]: i.split('=')[1] for i in query}
@@ -72,7 +72,6 @@ class API:
 
             for key in set(query).difference(inspect.getfullargspec(handler).args):
                 del query[key]
-            print(query)
         else:
             handler, kwargs = self.find_handler(request_path=request.path)
 

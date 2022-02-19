@@ -17,4 +17,7 @@ def home(request, response, name, q):
 
 @app.route('/about')
 def about(request, response):
-    response.text = "Hello from the ABOUT page"
+    if request.method == 'POST':
+        response.text = 'hola'
+    else:
+        response.text = "Hello from the ABOUT page"
