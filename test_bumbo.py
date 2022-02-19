@@ -1,7 +1,5 @@
 import pytest
 
-from api import API
-
 
 def test_basic_route(api):
     @api.route('/home')

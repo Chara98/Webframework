@@ -3,7 +3,6 @@ from parse import parse
 from jinja2 import Environment, FileSystemLoader
 from requests import Session as RequestsSession
 from wsgiadapter import WSGIAdapter as RequestsWSGIAdapter
-from urllib.parse import urlparse
 import inspect
 import os
 
