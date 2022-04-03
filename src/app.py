@@ -1,4 +1,4 @@
-from api import API
+from src.api import API
 
 app = API()
 
